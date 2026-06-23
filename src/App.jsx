@@ -211,7 +211,7 @@ function LandingPage({ onStart }) {
         </p>
         <h2 style={{ fontFamily:"Barlow Condensed", fontWeight:900, fontSize:38,
           color:WHITE, margin:"0 0 40px", lineHeight:1.1 }}>
-          Competitive ball. Real commitment.<br />
+          Competitive softball. Real commitment.<br />
           <span style={{ color:MINT }}>One team.</span>
         </h2>
 
@@ -229,7 +229,7 @@ function LandingPage({ onStart }) {
               <div style={{ fontSize:28, marginBottom:10 }}>{c.icon}</div>
               <h3 style={{ fontFamily:"Barlow Condensed", fontWeight:800, fontSize:20,
                 color:WHITE, margin:"0 0 8px" }}>{c.title}</h3>
-              <p style={{ fontFamily:"Barlow", fontSize:14, color:MUTED, margin:0, lineHeight:1.65 }}>
+              <p style={{ fontFamily:"Barlow", fontSize:16, color:MUTED, margin:0, lineHeight:1.65 }}>
                 {c.body}
               </p>
             </div>
