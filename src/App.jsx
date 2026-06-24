@@ -178,7 +178,7 @@ function LandingPage({ onStart }) {
         <p style={{
           fontFamily:"Barlow Condensed", fontSize:14, fontWeight:700,
           letterSpacing:5, color:MINT, marginBottom:16, textTransform:"uppercase",
-        }}>Fall 2025</p>
+        }}>Fall 2026</p>
         <h1 style={{
           fontFamily:"Barlow Condensed", fontWeight:900,
           fontSize:"clamp(52px,10vw,96px)", lineHeight:.95,
@@ -264,8 +264,8 @@ function LandingPage({ onStart }) {
 ══════════════════════════════════════════════════════════════════════════════ */
 const EMPTY_PLAYER = {
   parentFirst:"", parentLast:"", phone:"", email:"",
-  playerFirst:"", playerLast:"", playerAge:"", teamInterest:"",
-  school:"", gradYear:"", prevTeam1:"", prevTeam2:"", position:"", bio:"",
+  playerFirst:"", playerLast:"", playerAge:"", dob:"", teamInterest:"",
+  school:"", gradYear:"", prevTeam1:"", prevTeam2:"", position:"", position2:"", bio:"",
 };
 
 function PlayerPage({ onNext, onBack, data, setData }) {
@@ -273,7 +273,7 @@ function PlayerPage({ onNext, onBack, data, setData }) {
   const set = k => e => setData(d => ({ ...d, [k]: e.target.value }));
 
   const validate = () => {
-    const req = ["parentFirst","parentLast","phone","email","playerFirst","playerLast","playerAge","teamInterest","position"];
+    const req = ["parentFirst","parentLast","phone","email","playerFirst","playerLast","playerAge","dob","teamInterest","position"];
     for (const k of req) {
       if (!data[k].trim()) { setErr("Please fill in all required fields."); return false; }
     }
@@ -327,12 +327,21 @@ function PlayerPage({ onNext, onBack, data, setData }) {
                   </select>
                 </Field>
               </Row>
+              <Field label="Date of Birth" required>
+                <input type="date" value={data.dob} onChange={set("dob")} style={inputStyle} />
+              </Field>
               <Row>
                 <Field label="School"><input value={data.school} onChange={set("school")} placeholder="School name" style={inputStyle} /></Field>
                 <Field label="Grad Year"><input value={data.gradYear} onChange={set("gradYear")} placeholder="e.g. 2031" style={inputStyle} /></Field>
               </Row>
               <Field label="Primary Position" required>
                 <select value={data.position} onChange={set("position")} style={selectStyle}>
+                  <option value="">Select position</option>
+                  {POSITIONS.map(p => <option key={p} value={p}>{p}</option>)}
+                </select>
+              </Field>
+              <Field label="Secondary Position (optional)">
+                <select value={data.position2} onChange={set("position2")} style={selectStyle}>
                   <option value="">Select position</option>
                   {POSITIONS.map(p => <option key={p} value={p}>{p}</option>)}
                 </select>
@@ -452,6 +461,8 @@ function FitPage({ onSubmit, onBack, playerData, fitData, setFitData }) {
         school:       playerData.school,
         grad_year:    playerData.gradYear,
         position:     playerData.position,
+        position2:    playerData.position2,
+        dob:          playerData.dob,
         prev_team1:   playerData.prevTeam1,
         prev_team2:   playerData.prevTeam2,
         bio:          playerData.bio,
